@@ -23,7 +23,7 @@ er besteht aus drei Sensoren:
 
 wenn man diese jeweils drei Messwerte geschickt kombiniert kann man die _relative_ Position _im Raum_ bestimmen.
 
-Dieser Sensor eignet sich für alle Dinge die mit
+Dieser Sensor eignet sich für alle Dinge die mit Bewegung und deren Erkennung zu tun haben.
 
 ## Anschlüsse
 
