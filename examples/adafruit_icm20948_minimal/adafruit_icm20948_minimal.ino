@@ -38,6 +38,7 @@ void loop() {
     sensors_event_t temp;
     icm.getEvent(&accel, &gyro, &temp, &mag);
 
+    Serial.println();
     // Zeige Werte
     Serial.print("\t\tTemperature ");
     Serial.print(temp.temperature);
@@ -60,7 +61,6 @@ void loop() {
     Serial.print(" \tZ: ");
     Serial.print(gyro.gyro.z);
     Serial.println(" radians/s ");
-    Serial.println();
 
     // Kompass
     Serial.print("\t\tMag X: ");

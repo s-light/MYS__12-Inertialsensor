@@ -90,6 +90,7 @@ void loop() {
     sensors_event_t temp;
     icm.getEvent(&accel, &gyro, &temp, &mag);
 
+    Serial.println();
     // Zeige Werte
     Serial.print("\t\tTemperature ");
     Serial.print(temp.temperature);
@@ -112,7 +113,6 @@ void loop() {
     Serial.print(" \tZ: ");
     Serial.print(gyro.gyro.z);
     Serial.println(" radians/s ");
-    Serial.println();
 
     // Kompass
     Serial.print("\t\tMag X: ");
@@ -141,6 +141,9 @@ void loop() {
 -   Das Sollte nun passieren:
     - die aktuellen Werte des Sensors sollten dort angezeigt werden.
     - bewege den Sensor und schaue wie sich die Werte verändern
+
+#### Output
+![IDE output example](<extras/adafruit_icm20948_minimal IDE-output.png>)
 
 ## Nächste Schritte
 um die Werte besser zu verstehen hilft eine Grafische Ausgabe:
@@ -178,19 +181,23 @@ void setup(void) {
     Serial.println("ICM20948 gefunden!");
     Serial.println("Bitte Arduino-Plotter starten.");
     Serial.println("(Werkzeuge - Serial-Plotter)");
-    
-    // wir geben den variablen namen:
+    Serial.println();
+
+    // wir geben den variablen Namen:
     // https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-serial-plotter/
-    Serial.print("temp:0,");
-    Serial.print("accel_x:0,");
-    Serial.print("accel_y:0,");
-    Serial.print("accel_z:0,");
-    Serial.print("gyro_x:0,");
-    Serial.print("gyro_y:0,");
-    Serial.print("gyro_z:0,");
-    Serial.print("mag_x:0,");
-    Serial.print("mag_y:0,");
-    Serial.print("mag_z:0");
+    // aktuell muss wie unten bei jedem datensatz die namen mit drin stehen.
+    // dies ist ein bug im Serial-Plotter:
+    // https://github.com/arduino/arduino-serial-plotter-webapp/issues/14
+    Serial.print("temp,");
+    Serial.print("accel_x,");
+    Serial.print("accel_y,");
+    Serial.print("accel_z,");
+    Serial.print("gyro_x,");
+    Serial.print("gyro_y,");
+    Serial.print("gyro_z,");
+    Serial.print("mag_x,");
+    Serial.print("mag_y,");
+    Serial.print("mag_z");
     Serial.println();
 }
 
@@ -203,39 +210,50 @@ void loop() {
     sensors_event_t temp;
     icm.getEvent(&accel, &gyro, &temp, &mag);
 
+    Serial.print("temp:");
     Serial.print(temp.temperature);
-
     Serial.print(",");
 
+    Serial.print("accel_x:");
     Serial.print(accel.acceleration.x);
     Serial.print(",");
+    Serial.print("accel_y:");
     Serial.print(accel.acceleration.y);
     Serial.print(",");
+    Serial.print("accel_z:");
     Serial.print(accel.acceleration.z);
-
     Serial.print(",");
+
+    Serial.print("gyro_x:");
     Serial.print(gyro.gyro.x);
     Serial.print(",");
+    Serial.print("gyro_y:");
     Serial.print(gyro.gyro.y);
     Serial.print(",");
+    Serial.print("gyro_z:");
     Serial.print(gyro.gyro.z);
-
     Serial.print(",");
+
+    Serial.print("mag_x:");
     Serial.print(mag.magnetic.x);
     Serial.print(",");
+    Serial.print("mag_y:");
     Serial.print(mag.magnetic.y);
     Serial.print(",");
+    Serial.print("mag_z");
     Serial.print(mag.magnetic.z);
 
     Serial.println();
 
-    delay(1);
+    delay(100);
 }
+
 ```
 
 und nach einem Hochladen Öffne nun unter `Werkzeuge` - `Serial-Plotter`
 nun sollten die Werte in einer visuellen Diagram-Form angezeigt werden.
 
+![plot](<extras/adafruit_icm20948_minimal IDE-plot.png>)
 
 
 
